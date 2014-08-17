@@ -1,0 +1,35 @@
+{{ define "index" }}
+
+<!DOCTYPE html>
+<html>
+  {{ template "header" }}
+  <body>
+    <div class='container'>
+      {{ template "navbar" }}
+      <div class='content'>
+        <div class="lead">Create a pixelated version of your image:</div>
+        
+        <form class="form form-inline" method="post" action="/pixelate" enctype="multipart/form-data">
+          <select name="pixel_size" class="form-control input-lg">
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="50">100</option>
+          </select>
+          
+          <input type="file" name="image" class="form-control input-lg"/>
+          <button class="btn btn-primary btn-lg" type="submit">
+            Do it!
+          </button>
+          <p class="help-block">Select the number of pixels and choose a JPEG file to pixelate.</p>
+        </form>
+      </div>
+    </div>
+    <br>
+  {{ template "footer" }}
+  </body>
+</html>
+
+{{ end }}

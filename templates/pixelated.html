@@ -1,0 +1,29 @@
+{{ define "pixelated" }}
+
+<!DOCTYPE html>
+<html>
+  {{ template "header" }}
+  <body>
+    <div class='container'>
+      {{ template "navbar" }}
+
+        <div class="col-md-6">
+          <img src="data:image/jpg;base64,{{ .original }}" width="100%">
+          <div class="lead">Original</div>
+        </div>
+        <div class="col-md-6">
+          <img src="data:image/jpg;base64,{{ .pixelated }}" width="100%">
+          <div class="lead">Pixelated</div>
+        </div>
+
+        <div class="col-md-12 center">
+          <a class="btn btn-lg btn-info" href="/">Go Back</a>
+        </div>
+    </div>
+    
+    <br>
+  {{ template "footer" }}
+  </body>
+</html>
+
+{{ end }}
