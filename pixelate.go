@@ -18,8 +18,6 @@ func main() {
   fmt.Println("Pixelate server started.")
   router := httprouter.New()
   
-  initData()
-  
   router.GET("/", index)
   router.GET("/login", login)
   router.POST("/login", authenticate)
@@ -35,11 +33,11 @@ func main() {
   router.ServeFiles("/js/*filepath", http.Dir("public/js"))
   
   server := &http.Server{
-  	Addr:           "0.0.0.0:1234",
-  	Handler:        router,
-  	ReadTimeout:    10 * time.Second,
-  	WriteTimeout:   600 * time.Second,
-  	MaxHeaderBytes: 1 << 20,
+    Addr:           "0.0.0.0:1234",
+    Handler:        router,
+    ReadTimeout:    10 * time.Second,
+    WriteTimeout:   600 * time.Second,
+    MaxHeaderBytes: 1 << 20,
   }
   server.ListenAndServe()
 }
@@ -65,17 +63,17 @@ func login(writer http.ResponseWriter, request *http.Request, _ httprouter.Param
 
 // POST /login
 // Authenticate the user given the email and password
-func authenticate(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {  
+func authenticate(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {  
   err := request.ParseForm()
   check(err, "Cannot parse form")
 
   user, err := getUser(request.PostFormValue("email"))
   check(err, "Can't get user")
-  
+
   if user.Password == encrypt(request.PostFormValue("password")) {
     sessionId := addSession(request.PostFormValue("email"))  
     cookie := http.Cookie{
-      Name:      "chitchat_cookie", 
+      Name:      "pixelate_cookie", 
       Value:     sessionId,
       Expires:   time.Now().Add(90 * time.Minute),
       HttpOnly:  true,

@@ -25,7 +25,7 @@ type Session struct {
 var sessions map[string]Session
 var users map[string]User
 
-func initData() {
+func init() {
   sessions = make(map[string]Session)
   users    = make(map[string]User)
 }
